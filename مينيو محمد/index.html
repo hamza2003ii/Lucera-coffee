@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوسيرا كافيه | Lucera coffee </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-dark: #1e3932;
+            --accent-gold: #d4af37;
+            --soft-beige: #f8f5f0;
+        }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--soft-beige);
+            color: var(--primary-dark);
+            overflow-x: hidden;
+        }
+        .hero-section {
+            background: linear-gradient(rgba(30, 57, 50, 0.85), rgba(30, 57, 50, 0.9)),
+                        url('https://images.unsplash.com/photo-1544145945-f904253db0ad?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        /* إخفاء scrollbar مع الحفاظ على التمرير */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .category-tab {
+            color: var(--primary-dark);
+            opacity: 0.75;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .category-tab.active {
+            opacity: 1;
+            font-weight: 800;
+            background: rgba(30, 57, 50, 0.08);
+            box-shadow: 0 4px 12px rgba(30, 57, 50, 0.08);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px rgba(30, 57, 50, 0.12);
+        }
+        .product-image {
+            height: 220px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+        .size-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary-dark);
+            background: white;
+            color: var(--primary-dark);
+            font-weight: bold;
+            border-radius: 9999px;
+            transition: all 0.2s;
+        }
+        .size-btn.active, .size-btn:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+        /* مؤشر التبويب النشط */
+        #active-indicator {
+            height: 3px;
+            background: var(--primary-dark);
+            border-radius: 3px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-section h-[45vh] md:h-[55vh] flex items-center justify-center text-center px-4 rounded-b-3xl shadow-2xl mb-8">
+        <div>
+            <h1 class="text-white text-5xl md:text-7xl font-black mb-4 tracking-tight drop-shadow-xl">LUCERA CAFE</h1>
+            <p class="text-[#d4af37] text-xl md:text-3xl font-light">فن المذاق الطبيعي.. في كل رشفة حكاية</p>
+        </div>
+    </header>
+
+    <!-- قسم التبويبات الاحترافي -->
+    <section class="sticky top-0 z-50 bg-gradient-to-b from-[var(--soft-beige)] to-transparent pt-3 pb-2 shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="relative">
+                <nav class="flex items-center overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-3 md:gap-6 pb-3 md:justify-center" aria-label="فئات المشروبات">
+                    <button onclick="filterMenu('milk')" class="category-tab px-6 py-2.5 md:px-8 md:py-3 rounded-full text-lg md:text-xl snap-start active" id="tab-milk">
+                        كوكتيلات الحليب
+                    </button>
+                    <button onclick="filterMenu('fresh')" class="category-tab px-6 py-2.5 md:px-8 md:py-3 rounded-full text-lg md:text-xl snap-start" id="tab-fresh">
+                        عصائر فريش
+                    </button>
+                    <button onclick="filterMenu('mojito')" class="category-tab px-6 py-2.5 md:px-8 md:py-3 rounded-full text-lg md:text-xl snap-start" id="tab-mojito">
+                        موهيتو وانتعاش
+                    </button>
+                </nav>
+                <div id="active-indicator" class="absolute bottom-0"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container mx-auto px-5 mb-8">
+        <div class="bg-gradient-to-r from-yellow-100 to-amber-200 text-amber-900 p-5 md:p-6 rounded-2xl shadow-md flex flex-col md:flex-row items-center justify-between">
+            <div class="flex items-center gap-4 mb-4 md:mb-0">
+                <div class="bg-white/40 p-3 rounded-full">
+                    <i class="fas fa-star text-3xl text-amber-800"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold">تجربة لوسيرا الملكية</h3>
+                    <p class="text-base">قشطة بلدية + عسل طبيعي + مكسرات فاخرة</p>
+                </div>
+            </div>
+            <span class="bg-amber-800 text-amber-100 px-6 py-2.5 rounded-full font-bold text-base shadow">
+                إضافة اختيارية +
+            </span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-5 pb-20">
+        <div id="menu-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </main>
+
+    <footer class="bg-[#1e3932] text-[#f8f5f0] py-16 px-6 rounded-t-3xl">
+        <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10 text-center lg:text-right">
+            <div>
+                <h3 class="text-4xl font-black mb-6 text-[#d4af37]">لوسيرا كافيه</h3>
+                <p class="opacity-80 text-lg">نختار أفضل المكونات لنقدم تجربة طعم حقيقية وصحية.</p>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold mb-6">تواصل معنا</h3>
+                <p class="mb-3"><i class="far fa-clock ml-2 text-[#d4af37]"></i> يومياً: 10 ص – 12 م</p>
+                <p class="mb-4"><a href="tel:+963997462212" class="hover:text-[#d4af37]"><i class="fas fa-phone ml-2 text-[#d4af37]"></i> +963 997 462 212</a></p>
+                <div class="flex justify-center lg:justify-start gap-6 text-3xl">
+                    <a href="https://www.instagram.com/lucera.coffee?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="hover:text-[#d4af37]"><i class="fab fa-instagram"></i></a>
+            
+                    <a href="https://wa.me/963997462212" class="hover:text-green-400"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold mb-6">موقعنا</h3>
+                <p class="mb-4 flex items-center justify-center lg:justify-start">
+                    <i class="fas fa-map-marker-alt ml-2 text-[#d4af37] text-xl"></i>
+                  شارع الاميرات (ساحة السوق) درعا بلدة الجيزة 
+                </p>
+                <div class="rounded-2xl overflow-hidden border-4 border-white/20">
+                    <a href="https://maps.app.goo.gl/dfSk6UEDNqCbQwXY8" target="_blank">
+                        <img src="./img/image.jpg" alt="خريطة" class="w-full h-48 object-cover">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <p class="text-center mt-12 pt-8 border-t border-white/20 opacity-70">© 2026  Lucera coffee </p>
+    </footer>
+
+    <script>
+        const PHONE = "+963997462212"; // غيّر الرقم إلى رقمك الحقيقي
+
+        const menuItems = {
+            milk: [
+                { name: "فراولة وحليب", img: "./img/فراولة وحليب.jpg", desc: "كريمي غني بالفراولة الطازجة" },
+                { name: "موز وحليب", img: "./img/موز وحليب.jpg", desc: "طعم كلاسيكي محبوب من الموز الناضج" },
+                { name: "مكس موز وفراولة", img: "./img/مكس موز وفراولة.jpg", desc: "مزيج مثالي من الموز والفراولة" },
+                { name: "فراولة ومانجا", img: "./img/فراولة ومانجا.jpg", desc: "نكهة استوائية من الفراولة والمانجو" },
+                { name: "حليب ومانجا", img: "./img/حليب ومانجا.jpg", desc: "كريمي ولذيذ مع المانجو الطازج" },
+                { name: "مكس فواكة", img: "./img/مكس فواكة.jpg", desc: "مزيج من الفواكه الطازجة المتنوعة" },
+                { name: "كوكتيل لوسيرا", img: "./img/كوكتيل لوسيرا.jpg", desc: "كوكتيل خاص بلوسيرا الفريد" },
+                { name: "أفوكادو", img: "./img/أفوكادو.jpg", desc: "سموذي أفوكادو كريمي وصحي" },
+                { name: "أفوكادو ومانجا", img: "./img/أفوكادو ومانجا.jpg", desc: "مزيج أفوكادو ومانجو استوائي" },
+                { name: "أفوكادو وفراولة", img: "./img/أفوكادو وفراولة.jpg", desc: "طعم منعش من الأفوكادو والفراولة" }
+            ],
+            fresh: [
+                { name: "برتقال", img: "./img/برتقال.jpg", desc: "عصير برتقال طازج ومنعش" },
+                { name: "برتقال وفراولة", img: "./img/برتقال وفراولة.jpg", desc: "مزيج برتقال وفراولة لذيذ" },
+                { name: "برتقال وجزر", img: "./img/برتقال وجزر.jpg", desc: "عصير برتقال وجزر مغذي" },
+                { name: "برتقال وليمون", img: "./img/برتقال وليمون.jpg", desc: "نكهة حمضية من البرتقال والليمون" },
+                { name: "ليمون", img: "./img/ليمون.jpg", desc: "عصير ليمون طازج ومنشط" },
+                { name: "ليمون ونعنع", img: "./img/ليمون ونعنع.jpg", desc: "ليمون مع نعناع منعش" },
+                { name: "ليمون وكيوي", img: "./img/ليمون وكيوي.jpg", desc: "مزيج ليمون وكيوي استوائي" },
+                { name: "رمان", img: "./img/رمان.jpg", desc: "عصير رمان غني ومفيد" },
+                { name: "جزر", img: "./img/جزر.jpg", desc: "عصير جزر طازج وصحي" },
+                { name: "بولو", img: "./img/بولو.jpg", desc: "عصير بولو منعش ومميز" }
+            ],
+            mojito: [
+                { name: "مكس لوسيرا(١)", img: "./img/مكس لوسيرا(١).jpg", desc: "مكس لوسيرا الخاص رقم 1" },
+                { name: "مكس لوسيرا (٢)", img: "./img/مكس لوسيرا (٢).jpg", desc: "مكس لوسيرا الخاص رقم 2" },
+                { name: "علكة", img: "./img/علكة.jpg", desc: "موهيتو بنكهة العلكة الممتعة" },
+                { name: "نعنع", img: "./img/نعنع.jpg", desc: "موهيتو نعناع كلاسيكي" },
+                { name: "كرز", img: "./img/كرز.jpg", desc: "موهيتو كرز طازج" },
+                { name: "بطيخ", img: "./img/بطيخ.jpg", desc: "موهيتو بطيخ صيفي منعش" },
+                { name: "توت", img: "./img/توت.jpg", desc: "موهيتو توت غني بالنكهة" },
+                { name: "فراولة", img: "./img/فراولة.jpg", desc: "موهيتو فراولة لذيذ" },
+                { name: "كيوي", img: "./img/كيوي.jpg", desc: "موهيتو كيوي استوائي" },
+                { name: "باشن فروت", img: "./img/باشن فروت.jpg", desc: "موهيتو باشن فروت مثير" }
+            ]
+        };
+
+        function filterMenu(category) {
+            document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(`tab-${category}`).classList.add('active');
+
+            const container = document.getElementById('menu-container');
+            container.style.opacity = '0';
+
+            setTimeout(() => {
+                container.innerHTML = '';
+                (menuItems[category] || []).forEach((item, i) => {
+                    const cardId = `card-${category}-${i}`;
+                    container.innerHTML += `
+                        <div class="glass-card rounded-2xl p-4 flex flex-col h-full group" id="${cardId}">
+                            <img src="${item.img}" class="product-image mb-4 group-hover:scale-105 transition-transform" alt="${item.name}">
+                            <h3 class="text-xl font-bold mb-2">${item.name}</h3>
+                            <p class="opacity-75 mb-3 text-sm">${item.desc}</p>
+                            <div class="flex justify-between items-center mt-auto">
+                                <div class="flex gap-2">
+                                    <button class="size-btn" onclick="selectSize(this, '${cardId}')">S</button>
+                                    <button class="size-btn active" onclick="selectSize(this, '${cardId}')">M</button>
+                                    <button class="size-btn" onclick="selectSize(this, '${cardId}')">L</button>
+                                </div>
+                                <button onclick="orderItem('${cardId}', '${item.name}')" class="bg-[var(--primary-dark)] text-white px-5 py-2 rounded-full flex items-center gap-2 hover:bg-[var(--accent-gold)] hover:text-[var(--primary-dark)] transition">
+                                    اطلب <i class="fab fa-whatsapp"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.style.opacity = '1';
+                updateIndicator();
+            }, 300);
+        }
+
+        function selectSize(btn, cardId) {
+            document.querySelectorAll(`#${cardId} .size-btn`).forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function orderItem(cardId, name) {
+            const activeSize = document.querySelector(`#${cardId} .size-btn.active`).textContent;
+            const msg = encodeURIComponent(`أريد طلب ${name} حجم ${activeSize} من لوسيرا`);
+            const link = `https://wa.me/${PHONE}?text=${msg}`;
+            window.open(link, '_blank');
+        }
+
+        function updateIndicator() {
+            const active = document.querySelector('.category-tab.active');
+            if (!active) return;
+            const nav = active.parentElement;
+            const indicator = document.getElementById('active-indicator');
+            const left = active.offsetLeft - nav.scrollLeft;
+            indicator.style.left = `${left}px`;
+            indicator.style.width = `${active.offsetWidth}px`;
+        }
+
+        // تحديث المؤشر عند التحميل / تغيير حجم / scroll
+        window.addEventListener('load', () => { filterMenu('milk'); updateIndicator(); });
+        window.addEventListener('resize', updateIndicator);
+        document.querySelector('nav').addEventListener('scroll', updateIndicator);
+    </script>
+</body>
+</html>
